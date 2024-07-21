@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+ backend:
+  build: ./
+  ports:
+   - 127.0.0.1:4000:4000
+  env_file:
+   - .env
+  depends_on:
+   - mongo
+  environment:
+   MONGODB_URL: "mongodb://mongo/db-drag-nestJs"
+
+ mongo:
+  container_name: mongo
+  image: mongo
+  ports:
+   - 27017:27017
+  volumes:
+   - mongodb:/data/db
+   - mongodb_config:/data/configdb
+
+volumes:
+ mongodb:
+ mongodb_config:
